@@ -5,12 +5,22 @@ def check(myString):
     '''
     Each time, when an open parentheses is encountered push it in the stack,
     and when closed parenthesis is encountered, match it with the top of stack
-    and pop it. if stack is empty at the end, return Balanced otherwise, Unbalanced.
+    and pop it. if stack is empty at the end, return True. Otherwise, False.
     '''
+    # if myString is empty return False
+    if myString == '':
+        return False
 
     # Declare open and close parentheses
     open_parenthesis = [ '[', '{', '(']
     close_parenthesis = [ ']', '}', ')']
+
+    # Lower case the string
+    myString = myString.lower()
+
+    # Eliminate characthers and numbers
+    for e in '1234567890qwertyuiopasdfghjklzxcvbnm+-*/':
+        myString = myString.replace(e, '')
 
     # Empty stack
     stack = []
@@ -30,22 +40,9 @@ def check(myString):
                 # Remove it from the stack
                 stack.pop()
             else:
-                # Return "Unbalanced"
-                return "Unbalanced"
+                # Return "False"
+                return False
     # If the stack is empty
     if len(stack) == 0:
-        # Return "Balanced"
-        return "Balanced"
-
-# Testing the code
-string_01 = "{[]{()}}"
-print(string_01, '-', check(string_01))
-
-string_02 = "[{}{})(]"
-print(string_02, '-', check(string_02))
-
-string_03 = "{([}()])"
-print(string_03, '-', check(string_03))
-
-string_04 = "{([]())}"
-print(string_04, '-', check(string_04))
+        # Return "True"
+        return True
